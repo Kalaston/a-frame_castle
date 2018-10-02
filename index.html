@@ -42,7 +42,7 @@
   </script>
   <a-scene inspector-plugin-recast>
     <a-entity id="npc" gltf-model="potatoe/scene.gltf" nav-agent="speed: 2" visible="false">
-      <a-entity id="rig" movement-controls="constrainToNavMesh: true" position="0 0 0">
+      <a-entity id="rig" movement-controls="constrainToNavMesh: true" position="0 0 5">
         <a-entity camera="active: true" position="0 2 0" look-controls="pointerLockEnabled: true">
           <a-cursor nav-pointer raycaster="objects: [nav-mesh]"></a-cursor>
         </a-entity>
