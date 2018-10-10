@@ -1,79 +1,80 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Yolistli</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
 
-<a-scene
-    stats
-    renderer="antialias: false;
+    <a-scene stats renderer="antialias: false;
               gammaOutput: true;
               sortObjects: true;
               physicallyCorrectLights: true"
-    vr-mode-ui="enabled: true">
+        vr-mode-ui="enabled: true">
 
-    <!-- Asset management system. -->
-    <a-assets>
-        <a-asset-item id="scenario" src="assets/castle/scene.gltf"></a-asset-item>
-        <img id="pyramid" src="assets/piramide.jpg">
-    </a-assets>
+        <!-- Asset management system. -->
+        <a-assets>
+            <a-asset-item id="scenario" src="assets/castle/scene.gltf"></a-asset-item>
+            <img id="pyramid" src="assets/piramide.jpg">
+        </a-assets>
 
-    <!-- Nav Mesh -->
-    <a-entity ground
-              gltf-model="assets/navmesh.gltf"
-              nav-mesh visible="false"
-    >
-    </a-entity>
+        <!-- Nav Mesh -->
+        <a-entity ground gltf-model="assets/navmesh.gltf" nav-mesh visible="false">
+        </a-entity>
 
-    <!-- Scene. -->
-    <a-entity id="cameraRig" position="0 1.6 0">
-        <a-entity id="head" position="0 0 0" camera look-controls="pointerLockEnabled:true">
-            <a-entity position="0.1 -0.1 0"
-                      touch-listener
-                      teleport-controls="cameraRig: #cameraRig;
+        <!-- Scene. -->
+        <a-entity id="cameraRig" position="0 1.6 0">
+            <a-entity id="head" position="0 0 0" camera look-controls="pointerLockEnabled:true">
+                <a-entity position="0.1 -0.1 0" touch-listener teleport-controls="cameraRig: #cameraRig;
                 teleportOrigin: #head;
                 startEvents:starttouch;
                 endEvents:endtouch;
                 curveShootingSpeed:15;
                 hitCylinderRadius:1;
-                collisionEntities: [ground]"
-            >
-            </a-entity>
-            <!-- hand controls -->
-            <a-entity id="left-hand"
-                      teleport-controls="cameraRig: #cameraRig;
+                collisionEntities: [ground]">
+                </a-entity>
+                <!-- hand controls -->
+                <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig;
                   teleportOrigin: #head;
                   startEvents: teleportstart;
                   endEvents: teleportend;
                   collisionEntities: [ground]"
-                      vive-controls="hand: left"
-                      oculus-touch-controls="hand: left"
-                      microsoft-motion-controls="hand: left"
-                      daydream-controls="hand: left"
-                      gearvr-controls="hand: left">
-            </a-entity>
-            <a-entity id="right-hand"
-                      teleport-controls="cameraRig: #cameraRig;
+                    vive-controls="hand: left" oculus-touch-controls="hand: left" microsoft-motion-controls="hand: left"
+                    daydream-controls="hand: left" gearvr-controls="hand: left">
+                </a-entity>
+                <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig;
                   teleportOrigin: #head;
                   startEvents: teleportstart;
                   endEvents: teleportend;
                   collisionEntities: [ground]"
-                      vive-controls="hand: right"
-                      microsoft-motion-controls="hand: right"
-                      oculus-touch-controls="hand: right"
-                      daydream-controls="hand: right"
-                      gearvr-controls="hand: right">
+                    vive-controls="hand: right" microsoft-motion-controls="hand: right" oculus-touch-controls="hand: right"
+                    daydream-controls="hand: right" gearvr-controls="hand: right">
+                </a-entity>
             </a-entity>
         </a-entity>
-    </a-entity>
 
-    <a-entity gltf-model="#scenario" position="7 -13 0"></a-entity>
+        <a-entity gltf-model="#scenario" position="7 -13 0"></a-entity>
 
-    <a-simple-sun-sky sun-position="-5 8 3"></a-simple-sun-sky>
+        <a-simple-sun-sky sun-position="-5 8 3"></a-simple-sun-sky>
 
-</a-scene>
+    </a-scene>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('SW registered: ', registration);
+                }).catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+            });
+        }
+    </script>
 
 </body>
+
 </html>
