@@ -17,8 +17,14 @@ require('aframe-simple-sun-sky');
 require('./components/touch-listener.js');
 require('./components/link-controls.js');
 
-document.onreadystatechange = function(){
-    document.querySelector('a-assets').addEventListener('loaded', function () {
-        console.log("OK LOADED");
-    });
-};
+window.addEventListener('load', () => {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./service-worker.js').then(registration => {
+            console.log('SW registered: ', registration);
+        }).catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+        });
+    } else {
+        console.log('Service workers are not supported.');
+    }
+});

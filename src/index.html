@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Yolistli</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="shortcut icon" href="favicon.png">
+    <link rel="shortcut icon" href="assets/favicon.png">
     <link rel="manifest" href="manifest.json">
 </head>
 
@@ -62,18 +62,6 @@
         <a-simple-sun-sky sun-position="-5 8 3"></a-simple-sun-sky>
 
     </a-scene>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js').then(registration => {
-                    console.log('SW registered: ', registration);
-                }).catch(registrationError => {
-                    console.log('SW registration failed: ', registrationError);
-                });
-            });
-        }
-    </script>
 
 </body>
 
