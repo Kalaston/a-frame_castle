@@ -17,7 +17,7 @@ require('aframe-simple-sun-sky');
 require('./components/touch-listener.js');
 require('./components/link-controls.js');
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js').then(registration => {
             console.log('SW registered: ', registration);

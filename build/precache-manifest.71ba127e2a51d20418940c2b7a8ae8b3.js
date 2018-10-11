@@ -4,12 +4,16 @@ self.__precacheManifest = [
     "url": "manifest.json"
   },
   {
-    "revision": "f45da2672384ebce5d6ebb23e8c77926",
+    "revision": "7285fd166192ed84728649aeefbf391b",
     "url": "index.html"
   },
   {
     "revision": "2aada2dd16d024c2f2df5a89ce0cd0cc",
     "url": "assets/navmesh.gltf"
+  },
+  {
+    "revision": "d9e64acf8aa26dd5bcfbe01d06a7a802",
+    "url": "assets/favicon.ico"
   },
   {
     "revision": "a3f9dbac12de2a38cffff1bf70099434",
@@ -28,7 +32,7 @@ self.__precacheManifest = [
     "url": "assets/.DS_Store"
   },
   {
-    "revision": "144e007dddecdb38a3b0",
+    "revision": "b07bec2692962799b6a8",
     "url": "app.js"
   }
 ];

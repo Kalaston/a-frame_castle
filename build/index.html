@@ -14,12 +14,12 @@
               gammaOutput: true;
               sortObjects: true;
               physicallyCorrectLights: true"
-        vr-mode-ui="enabled: true">
+             vr-mode-ui="enabled: true">
 
         <!-- Asset management system. -->
         <a-assets>
             <a-asset-item id="scenario" src="assets/castle/scene.gltf"></a-asset-item>
-            <img id="pyramid" src="2368525c0400ce3194070cdf63a40847.jpg">
+            <img id="pyramid" src="piramide.jpg">
         </a-assets>
 
         <!-- Nav Mesh -->
@@ -37,23 +37,24 @@
                 hitCylinderRadius:1;
                 collisionEntities: [ground]">
                 </a-entity>
+            </a-entity>
+
                 <!-- hand controls -->
-                <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig;
+            <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig;
                   teleportOrigin: #head;
                   startEvents: teleportstart;
                   endEvents: teleportend;
                   collisionEntities: [ground]"
-                    vive-controls="hand: left" oculus-touch-controls="hand: left" microsoft-motion-controls="hand: left"
-                    daydream-controls="hand: left" gearvr-controls="hand: left">
-                </a-entity>
-                <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig;
+                  vive-controls="hand: left" oculus-touch-controls="hand: left" microsoft-motion-controls="hand: left"
+                  daydream-controls="hand: left">
+            </a-entity>
+            <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig;
                   teleportOrigin: #head;
                   startEvents: teleportstart;
                   endEvents: teleportend;
                   collisionEntities: [ground]"
-                    vive-controls="hand: right" microsoft-motion-controls="hand: right" oculus-touch-controls="hand: right"
-                    daydream-controls="hand: right" gearvr-controls="hand: right">
-                </a-entity>
+                  vive-controls="hand: right" microsoft-motion-controls="hand: right" oculus-touch-controls="hand: right"
+                  daydream-controls="hand: right">
             </a-entity>
         </a-entity>
 
