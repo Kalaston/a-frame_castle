@@ -22,6 +22,13 @@
 
             <!-- Mixins -->
             <a-mixin id="hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; type: line; collisionEntities: [ground]; landingMaxAngle: 360; hitCylinderColor: #ff9f2b; curveHitColor: #FAFAFA; hitCylinderHeight: 0.05; checkCollisionChildren: false; hitEntityAlignNormal: false; maxLength: 15"></a-mixin>
+
+            <a-mixin id="portal"
+                     look-at="#camera"
+                     geometry="primitive: circle; segments: 64"
+                     material="shader: oasisPortal; backgroundColor: #333; transparent: true"
+                     raycastable
+                     animation__mouseenterscale="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; easing: easeInOutQuad; dir: alternate; loop: true; startEvents: mouseenter; dur: 1000; pauseEvents: mouseleave"></a-mixin>
         </a-assets>
 
         <!-- Nav Mesh -->

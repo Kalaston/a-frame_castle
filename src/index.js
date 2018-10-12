@@ -1,18 +1,15 @@
 //Community Components
 require('aframe');
-require('aframe-physics-system');
-require('aframe-physics-extras');
-require('aframe-haptics-component');
-require('super-hands');
-require('aframe-teleport-controls');
-require('aframe-ui-widgets');
+require('aframe-animation-component');
 require('aframe-event-set-component');
 require('aframe-simple-sun-sky');
+require('aframe-look-at-component');
+require('aframe-teleport-controls');
 
 //User Components
-//require('./components/change-sky.js');
-require('./components/link-controls.js');
+// requireAll(require.context('./components/', true, /\.js$/));
 require('./components/teleport-extras');
+require('./components/raycastable');
 
 window.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) {
