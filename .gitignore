@@ -83,3 +83,14 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Editors
+# =========================
+
+.idea
+
+# Project
+# =========================
+
+build/
+.firebase

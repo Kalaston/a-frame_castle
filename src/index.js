@@ -11,11 +11,8 @@ require('aframe-simple-sun-sky');
 
 //User Components
 //require('./components/change-sky.js');
-//require('./components/change-mountains.js');
-//require('./components/change-fog.js');
-//require('./components/phase-shift.js');
-require('./components/touch-listener.js');
 require('./components/link-controls.js');
+require('./components/teleport-extras');
 
 window.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) {

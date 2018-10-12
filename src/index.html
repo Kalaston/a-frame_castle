@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Yolistli</title>
@@ -20,6 +19,9 @@
         <a-assets>
             <a-asset-item id="scenario" src="assets/castle/scene.gltf"></a-asset-item>
             <img id="pyramid" src="assets/piramide.jpg">
+
+            <!-- Mixins -->
+            <a-mixin id="hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; type: line; collisionEntities: [ground]; landingMaxAngle: 360; hitCylinderColor: #ff9f2b; curveHitColor: #FAFAFA; hitCylinderHeight: 0.05; checkCollisionChildren: false; hitEntityAlignNormal: false; maxLength: 15"></a-mixin>
         </a-assets>
 
         <!-- Nav Mesh -->
@@ -27,32 +29,21 @@
         </a-entity>
 
         <!-- Scene. -->
-        <a-entity id="cameraRig" position="0 1.6 0">
-            <a-entity id="head" position="0 0 0" camera look-controls="pointerLockEnabled:true">
-                <a-entity position="0.1 -0.1 0" touch-listener teleport-controls="cameraRig: #cameraRig;
-                teleportOrigin: #head;
-                startEvents:starttouch;
-                endEvents:endtouch;
-                curveShootingSpeed:15;
-                hitCylinderRadius:1;
-                collisionEntities: [ground]">
-                </a-entity>
+        <a-entity id="cameraRig">
+            <a-entity id="head" position="0 1.6 0" camera look-controls="pointerLockEnabled:true">
+                <!-- Control for Web and Mobile -->
+                <a-entity position="0.1 -0.1 0" teleport-extras mixin="hand"
+                          teleport-controls="startEvents: starttouch; endEvents: endtouch"></a-entity>
             </a-entity>
 
-                <!-- hand controls -->
-            <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig;
-                  teleportOrigin: #head;
-                  startEvents: teleportstart;
-                  endEvents: teleportend;
-                  collisionEntities: [ground]"
+            <!-- SECOND HAND: Primary hand. -->
+            <a-entity id="left-hand" mixin="hand"  teleport-controls="startEvents: teleportstart; endEvents: teleportend"
                   vive-controls="hand: left" oculus-touch-controls="hand: left" microsoft-motion-controls="hand: left"
                   daydream-controls="hand: left">
             </a-entity>
-            <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig;
-                  teleportOrigin: #head;
-                  startEvents: teleportstart;
-                  endEvents: teleportend;
-                  collisionEntities: [ground]"
+
+            <!-- RIGHT HAND: Primary hand. -->
+            <a-entity id="right-hand" mixin="hand" teleport-controls="startEvents: teleportstart; endEvents: teleportend"
                   vive-controls="hand: right" microsoft-motion-controls="hand: right" oculus-touch-controls="hand: right"
                   daydream-controls="hand: right">
             </a-entity>
