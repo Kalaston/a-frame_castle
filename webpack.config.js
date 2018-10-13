@@ -97,6 +97,10 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.glsl$/,
+                use: [{ loader: 'webpack-glsl-loader' }]
             }
         ]
     },

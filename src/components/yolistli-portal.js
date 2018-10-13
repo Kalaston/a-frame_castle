@@ -3,7 +3,7 @@ var AFRAME = require('aframe');
 var previousZone = localStorage.getItem('previousZone');
 var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '{}');
 
-AFRAME.registerComponent('oasis-portal', {
+AFRAME.registerComponent('yolisyli-portal', {
     schema: {
         color: {type: 'string'},
         href: {type: 'string'},
@@ -75,7 +75,7 @@ AFRAME.registerComponent('oasis-portal', {
     }
 });
 
-AFRAME.registerShader('oasisPortal', {
+AFRAME.registerShader('yolistliPortal', {
     schema: {
         backgroundColor: {default: 'red', type: 'color', is: 'uniform'},
         isGrayscale: {type: 'int', is: 'uniform', default: 0.0},
@@ -83,6 +83,6 @@ AFRAME.registerShader('oasisPortal', {
         time: {type: 'time', is: 'uniform'}
     },
 
-    vertexShader: require('./shaders/oasisPortalVertex.glsl'),
-    fragmentShader: require('./shaders/oasisPortalFragment.glsl')
+    vertexShader: require('../assets/shaders/oasisPortalVertex.glsl'),
+    fragmentShader: require('../assets/shaders/oasisPortalFragment.glsl')
 });

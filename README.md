@@ -1,4 +1,4 @@
-# WebVR Boilerplate
+# Yolistli
 
 <img align="center" width="100%" height="100%" src="https://user-images.githubusercontent.com/1003196/41374523-5d92c64c-6f21-11e8-8d3b-42ab01c8370d.PNG">
 
@@ -38,8 +38,6 @@ To view the dev server on an external device find out your local IP address (Typ
 
     192.168.1.165:8080
 
- **WebVR-Boilerplate was designed for Single-Page-Applications** and does not handle multiple html files without reconfiguring the _webpack.config.js_ HTMLWebpack plugin.
- 
  ## Building 
  
  To build and optimze your HTML/JS run:
@@ -50,7 +48,7 @@ To view the dev server on an external device find out your local IP address (Typ
 
 ## Deploying
 
-WebVR-Boilerplate uses Firebase for quick and easy static-asset hosting. If you haven't already, install Firebase by running:
+Yolistli uses Firebase for quick and easy static-asset hosting. If you haven't already, install Firebase by running:
 
     npm install -g firebase-tools
     
@@ -63,16 +61,3 @@ The _firebase.json_ file tells Firebase Hosting to use the _./build directory. F
 Once Firebase is installed and initialized, run the following code to build and deploy your code:
 
     npm run deploy
-    
-## Credits
-
-Aframe has an amazing community of developers, here are the people/projects that are being used in WebVR Boilerplate:
-
-- [Aframe](https://github.com/aframevr/aframe)
-- [Aframe Environment] (https://github.com/feiss/aframe-environment-component) by [Diego Goberna](http://feiss.be/) 
-- [Aframe Extras](https://github.com/donmccurdy/aframe-extras) by [Don McCurdy](https://www.donmccurdy.com/)
-- [Aframe Physics](https://github.com/donmccurdy/aframe-physics-system) by [Don McCurdy](https://www.donmccurdy.com/)
-- [Kframe](https://github.com/ngokevin/kframe/) by [Kevin Ngo](http://ngokevin.com/)
-- [Aframe Teleport Component](https://github.com/fernandojsg/aframe-teleport-controls) by [Fernando Serrano](http://fernandojsg.com/blog/)
-- [Aframe UI Widgets](https://github.com/caseyyee/aframe-ui-widgets) by [Casey Yee](https://twitter.com/whoyee?lang=en)
-- [Super-Hands](https://github.com/wmurphyrd/aframe-super-hands-component) by [Will Murphy](https://social.coop/@datatitian) 
