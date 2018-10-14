@@ -1,9 +1,13 @@
 const path = require('path');
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WorkboxPlugin = require('workbox-webpack-plugin');
+
+// Detect Node Environment Variable and load corresponing webpack config-extras
+const prod = process.argv.indexOf('-p') !== -1 || process.argv.indexOf('production') !== -1  || process.env.NODE_ENV === 'production';
+const ENV_CONF = prod ? require('./webpack.config.prod') : require('./webpack.config.dev');
 
 // Tell Webpack where to start looking for your files.
 const PATHS = {
@@ -11,7 +15,7 @@ const PATHS = {
     build: path.join(__dirname, 'build')
 };
 
-module.exports = {
+const config = {
     // We are looking at the Bootstrap files you installed with NPM.
     entry: {
         app: PATHS.app
@@ -105,9 +109,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanPlugin(['build'], {
-            allowExternal: true
-        }),
         new HtmlWebpackPlugin({
             title: 'Yolistli',
             template: `${PATHS.app}/index.html`,
@@ -122,23 +123,6 @@ module.exports = {
                 watch: false
             }
         ),
-        new WorkboxPlugin.GenerateSW({
-            // these options encourage the ServiceWorkers to get in there fast
-            // and not allow any straggling "old" SWs to hang around
-            clientsClaim: true,
-            skipWaiting: true,
-            // Exclude images from the precache
-            exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-
-            // Define runtime caching rules.
-            runtimeCaching: [{
-                urlPattern: /\.(?:png|jpg|jpeg|svg)$/, // Match any request ends with .png, .jpg, .jpeg or .svg.
-                handler: 'cacheFirst', // Apply a cache-first strategy.
-                options: { // Use a custom cache name.
-                    cacheName: 'images'
-                },
-            }],
-        }),
     ],
     devServer: {
         contentBase: path.join(__dirname, 'src'),
@@ -148,4 +132,9 @@ module.exports = {
         }
     },
     performance: { hints: false }
+};
+
+// Export a merge of base- and dev/prod- config
+module.exports = env => {
+    return merge(config, ENV_CONF)
 };

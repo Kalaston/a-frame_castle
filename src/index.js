@@ -25,3 +25,4 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log('Service workers are not supported.');
     }
 });
+
