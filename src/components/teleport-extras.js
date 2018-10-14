@@ -13,7 +13,7 @@ AFRAME.registerComponent('teleport-extras', {
             if (e.keyCode === 32) {
                 this.startTouch();
             }
-        }.bind(this))
+        }.bind(this));
 
         //Create the touchend event
         document.querySelector('a-scene').addEventListener('touchend', this.endTouch.bind(this))

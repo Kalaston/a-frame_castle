@@ -6,12 +6,13 @@ require('aframe-layout-component');
 require('aframe-simple-sun-sky');
 require('aframe-look-at-component');
 require('aframe-slice9-component');
-require('aframe-teleport-controls');
+//require('aframe-teleport-controls');
 
 //User Components
 // requireAll(require.context('./components/', true, /\.js$/));
+require('./components/aframe-teleport-controls.min');
+require('./components/teleport-listener');
 require('./components/teleport-extras');
-require('./components/raycastable');
 require('./components/yolistli-portal');
 
 window.addEventListener('DOMContentLoaded', () => {

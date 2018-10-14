@@ -13,6 +13,7 @@
               gammaOutput: true;
               sortObjects: true;
               physicallyCorrectLights: true"
+             teleport-refresh
              vr-mode-ui="enabled: true">
 
         <!-- Asset management system. -->
@@ -23,16 +24,15 @@
             <img id="shadowImg" src="assets/img/shadow.png">
 
             <!-- Mixins -->
-            <a-mixin id="hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; type: line; collisionEntities: [ground], [portal]; landingMaxAngle: 360; hitCylinderColor: #ff9f2b; curveHitColor: #FAFAFA; hitCylinderHeight: 0.05; checkCollisionChildren: false; hitEntityAlignNormal: false; maxLength: 15"></a-mixin>
-
-            <a-mixin id="hoverAnimation"
-                     animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic; pauseEvents: touched"></a-mixin>
+            <a-mixin id="hand"
+                     teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; type: line; collisionEntities: [ground], [portal]; landingMaxAngle: 360; hitCylinderColor: #ff9f2b; curveHitColor: #FAFAFA; hitCylinderHeight: 0.05; checkCollisionChildren: false; hitEntityAlignNormal: false; maxLength: 15"
+                     teleport-listener
+            ></a-mixin>
 
             <a-mixin id="portal"
                      look-at="#camera"
                      geometry="primitive: circle; segments: 64"
                      material="shader: yolistliPortal; backgroundColor: #333; transparent: true"
-                     raycastable
                      animation__mouseenterscale="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; easing: easeInOutQuad; dir: alternate; loop: true; startEvents: mouseenter; dur: 1000; pauseEvents: mouseleave"></a-mixin>
         </a-assets>
 
@@ -65,7 +65,7 @@
         <a-simple-sun-sky sun-position="-5 8 3"></a-simple-sun-sky>
 
         <!-- Portals -->
-        <a-link portal href="templates/pyramid.html" title="Pyramid" image="#pyramid" position="-11 0.5 -7"></a-link>
+        <a-link portal class="portal" href="templates/pyramid.html" title="Pyramid" image="#pyramid" position="-11 0.5 -7"></a-link>
 
     </a-scene>
 
