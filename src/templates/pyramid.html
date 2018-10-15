@@ -2,13 +2,52 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Links</title>
+    <title>Yolistli - Pyramid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
-<a-scene fog="color: #241417; near: 0; far: 30;" raycaster="far: 100; objects: [link];" cursor="rayOrigin: mouse" camera-position>
-    <a-assets>
-        <img id="pyramid" crossOrigin="anonymous" src="../assets/piramide.jpg">
-    </a-assets>
-</a-scene>
+    <a-scene>
+        <a-assets vr-mode-ui="enabled: true">>
+            <img id="pyramid-img" crossOrigin="anonymous" src="/assets/piramide.jpg">
+
+            <a-mixin id="hand"
+                     teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; type: line; collisionEntities: [portal]; landingMaxAngle: 360; hitCylinderColor: #ff9f2b; curveHitColor: #FAFAFA; hitCylinderHeight: 0.05; checkCollisionChildren: false; hitEntityAlignNormal: false; maxLength: 15"
+                     teleport-listener
+            ></a-mixin>
+        </a-assets>
+
+        <a-sky id="pyramid" radius="10" src="#pyramid-img"></a-sky>
+
+        <a-entity id="cameraRig">
+            <a-entity id="head" position="0 1.6 0" camera look-controls="pointerLockEnabled:true">
+                <!-- Control for Web and Mobile -->
+                <a-entity position="0.1 -0.1 0" teleport-extras mixin="hand"
+                          teleport-controls="startEvents: starttouch; endEvents: endtouch"></a-entity>
+            </a-entity>
+
+            <!-- SECOND HAND: Primary hand. -->
+            <a-entity id="left-hand" mixin="hand"  teleport-controls="startEvents: teleportstart; endEvents: teleportend"
+                      vive-controls="hand: left" oculus-touch-controls="hand: left" microsoft-motion-controls="hand: left"
+                      daydream-controls="hand: left">
+            </a-entity>
+
+            <!-- RIGHT HAND: Primary hand. -->
+            <a-entity id="right-hand" mixin="hand" teleport-controls="startEvents: teleportstart; endEvents: teleportend"
+                      vive-controls="hand: right" microsoft-motion-controls="hand: right" oculus-touch-controls="hand: right"
+                      daydream-controls="hand: right">
+            </a-entity>
+        </a-entity>
+
+        <!-- Portals -->
+        <a-link
+            portal class="portal"
+            href="/index.html"
+            title="INICIO"
+            image="#pyramid"
+            position="-4 0.5 -6"
+        ></a-link>
+    </a-scene>
 </body>
 </html>

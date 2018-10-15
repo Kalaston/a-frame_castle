@@ -3,7 +3,6 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WorkboxPlugin = require('workbox-webpack-plugin');
 
 // Detect Node Environment Variable and load corresponing webpack config-extras
 const prod = process.argv.indexOf('-p') !== -1 || process.argv.indexOf('production') !== -1  || process.env.NODE_ENV === 'production';
@@ -112,6 +111,12 @@ const config = {
         new HtmlWebpackPlugin({
             title: 'Yolistli',
             template: `${PATHS.app}/index.html`,
+            inject: 'head'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Yolistli - Pyramid',
+            template: `${PATHS.app}/templates/pyramid.html`,
+            filename: 'templates/pyramid.html',
             inject: 'head'
         }),
         new CopyWebpackPlugin([
