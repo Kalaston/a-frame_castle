@@ -28,12 +28,13 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                enforce: 'pre',
-                loader: 'eslint-loader',
-                exclude: /(node_modules|bower_components)/,
-                options: {
-                    emitwarning: true
+                test: /\.m?js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
                 }
             },
             {

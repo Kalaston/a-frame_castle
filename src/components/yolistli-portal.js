@@ -1,5 +1,3 @@
-var AFRAME = require('aframe');
-
 var previousZone = localStorage.getItem('previousZone');
 var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '{}');
 

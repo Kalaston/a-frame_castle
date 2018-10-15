@@ -1,4 +1,3 @@
-var AFRAME = require('aframe');
 AFRAME.registerComponent('teleport-extras', {
     schema: {
         cursor: { type: 'selector', default: '[cursor]' },

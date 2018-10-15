@@ -1,4 +1,3 @@
-var AFRAME = require('aframe');
 AFRAME.registerComponent('teleport-refresh', {
     play: function () {
         var i;

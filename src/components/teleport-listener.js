@@ -1,8 +1,9 @@
+var SoundPool = require('../lib/soundpool');
+
 /**
  * Allow teleport into portal.
  * Update line and hit entity colors.
  */
-var AFRAME = require('aframe');
 AFRAME.registerComponent('teleport-listener', {
     dependencies: ['teleport-controls'],
 
@@ -10,16 +11,30 @@ AFRAME.registerComponent('teleport-listener', {
         var el = this.el;
         var hitEntity;
         var intersections;
+        var soundPool;
+        var teleportFader;
 
         this.currentIntersection = null;
         intersections = el.components['teleport-controls'].intersections;
 
         // Listen to teleported for blink effect and play sound.
+        soundPool = SoundPool(utils.assetPath('assets/audio/portal.wav'), 0.6, 5);
+        teleportFader = document.getElementById('teleportFader');
         this.el.addEventListener('teleported', () => {
+            var faderTimeout;
+
             if (!intersections.length) { return; }
 
+            teleportFader.object3D.visible = true;
+            faderTimeout = setTimeout(() => {
+                teleportFader.object3D.visible = false;
+            }, 160);
+
             if (intersections[0].object.el.classList.contains('portal')) {
+                clearTimeout(faderTimeout);
                 intersections[0].object.el.emit('click');
+            } else {
+                soundPool.play();
             }
         });
 
