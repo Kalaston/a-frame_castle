@@ -1,11 +1,10 @@
 # Yolistli
 
-<img align="center" width="100%" height="100%" src="https://user-images.githubusercontent.com/1003196/41374523-5d92c64c-6f21-11e8-8d3b-42ab01c8370d.PNG">
+Yolisti is a WebVR experience to promote Cihuatán, the pre-Columbian archaeological site in central El Salvador. Yolistli is nahuatl and means Life.
+Some of the features of this application are:
 
-WebVR Boilerplate is a toolkit for WebVR creators to develop, build and deploy static WebVR experiences to the web. WebVR Boilerplate comes with a hot-reload webserver, the latest builds of [Aframe](https://github.com/aframevr/aframe/), Aframe's best community components and a Webpack build pipeline that packages your content for Firebase Hosting. Some other features are:
-
-- Cross compatibility across HTC Vive, Oculus Rift/Go, Gear VR, iOS and Android devices. (Tested 6.14.18)
-- Spatial Audio, Shadows, Controllers, Teleport, Physics and Environment code examples
+- Cross compatibility across HTC Vive, Oculus Rift/Go, Gear VR, iOS and Android devices.
+- Spatial Audio, 3D Views, Controllers, Teleport.
 - Local development server that can be viewed on external devices in realtime (helpful for debugging on iOS/Android)
 - All code is integrated into the Aframe Entity and Component system for best performance 
 - Dependencies are loaded through Webpack modules and NPM
@@ -13,7 +12,7 @@ WebVR Boilerplate is a toolkit for WebVR creators to develop, build and deploy s
 ___
 ## Installation
 
-    git clone https://github.com/ianpetrarca/webvr_boilerplate.git
+    git clone https://github.com/Kalaston/yolistli.git
     cd webvr_boilerplate
     npm install
 
@@ -25,8 +24,11 @@ ___
         └── templates          # Folder for resuseable Aframe entities (HTML)
     ├── .firebaserc            # Connects your project to Firebase Hosting 
     ├── firebase.json          # Specifies which directory to upload to Firebase
-    ├── package.json           # NPM 
-    ├── webpack.config.js      # Webpack Config file for dev server/production builds
+    ├── package.json           # NPM
+    ├── postcss.config         # Post configuration for CSS
+    ├── webpack.config.js      # Main Webpack Config
+    ├── webpack.config.prod.js # Webpack Config file for dev production builds
+    ├── webpack.config.dev.js  # Webpack Config file for dev server builds
     
 ## Development Stage
 
