@@ -4,9 +4,11 @@ module.exports = function SoundPool (src, volume, size) {
     var pool = [];
     var sound;
 
+    var fileExt = src.split('.').pop();
     for (i = 0; i < size; i++) {
         sound = new Audio(src);
         sound.volume = volume;
+        sound.type = 'audio/' + fileExt;
         sound.load();
         pool.push(sound);
     }
@@ -14,7 +16,17 @@ module.exports = function SoundPool (src, volume, size) {
     return {
         play: function () {
             if (pool[currSound].currentTime === 0 || pool[currSound].ended) {
-                pool[currSound].play();
+                var promise = pool[currSound].play();
+
+                if (promise !== undefined) {
+                    promise.catch(error => {
+                        // Auto-play was prevented
+                        // Show a UI element to let the user manually start playback
+                        console.log(error);
+                    }).then(() => {
+                        // Auto-play started
+                    });
+                }
             }
             currSound = (currSound + 1) % size;
         }
