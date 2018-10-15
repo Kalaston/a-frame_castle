@@ -4,9 +4,9 @@
   "description": "A project for Cihuatan.",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --mode production",
-    "dev": "./node_modules/.bin/webpack-dev-server --host 0.0.0.0 --mode development",
-    "deploy": "./node_modules/.bin/webpack --mode production && firebase deploy"
+    "build": "./node_modules/.bin/webpack --mode production --progress",
+    "dev": "./node_modules/.bin/webpack-dev-server --host 0.0.0.0 --mode development --progress",
+    "deploy": "./node_modules/.bin/webpack --mode production --progress && firebase deploy"
   },
   "repository": {
     "type": "git"
@@ -31,6 +31,7 @@
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
     "cssnano": "^4.1.4",
+    "eslint": "^5.7.0",
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",

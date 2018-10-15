@@ -14,10 +14,20 @@ const PATHS = {
     build: path.join(__dirname, 'build')
 };
 
+var entries = [];
+if (prod) {
+    entries = [
+        path.join(__dirname, 'src/index.js'),
+        path.join(__dirname, 'src/load-sworker.js')
+    ];
+} else {
+    entries = path.join(__dirname, 'src/index.js');
+}
+
 const config = {
     // We are looking at the Bootstrap files you installed with NPM.
     entry: {
-        app: PATHS.app
+        app: entries
     },
     // Here we're defining the output of our bundled JS.
     output: {

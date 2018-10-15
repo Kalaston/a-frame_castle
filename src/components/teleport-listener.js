@@ -21,17 +21,17 @@ AFRAME.registerComponent('teleport-listener', {
         soundPool = SoundPool(utils.assetPath('assets/audio/portal.wav'), 0.6, 5);
         teleportFader = document.getElementById('teleportFader');
         this.el.addEventListener('teleported', () => {
-            var faderTimeout;
 
             if (!intersections.length) { return; }
 
-            teleportFader.object3D.visible = true;
-            faderTimeout = setTimeout(() => {
-                teleportFader.object3D.visible = false;
-            }, 160);
-
             if (intersections[0].object.el.classList.contains('portal')) {
-                clearTimeout(faderTimeout);
+                var faderTimeout;
+
+                teleportFader.object3D.visible = true;
+                setTimeout(() => {
+                    teleportFader.object3D.visible = false;
+                }, 160);
+
                 intersections[0].object.el.emit('click');
             } else {
                 soundPool.play();
