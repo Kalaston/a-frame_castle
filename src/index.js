@@ -9,10 +9,8 @@ require('aframe-slice9-component');
 require('aframe-teleport-controls');
 
 //User Components
-// requireAll(require.context('./components/', true, /\.js$/));
-require('./components/teleport-listener');
-require('./components/teleport-extras');
-require('./components/yolistli-portal');
+function requireAll (req) { req.keys().forEach(req); }
+requireAll(require.context('./components/', true, /\.js$/));
 
 window.addEventListener('DOMContentLoaded', () => {
     if ('serviceWorker' in navigator) {

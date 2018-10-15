@@ -37,6 +37,7 @@
     "postcss-loader": "^3.0.0",
     "precss": "^3.1.2",
     "sass-loader": "^7.1.0",
+    "semistandard": "^12.0.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9",
@@ -58,5 +59,14 @@
     "aframe-teleport-controls": "github:wdiazux/aframe-teleport-controls#opt",
     "npm": "^6.4.1",
     "roboto-fontface": "^0.10.0"
+  },
+  "semistandard": {
+    "globals": [
+        "AFRAME",
+        "THREE"
+    ],
+    "ignore": [
+        "build/**"
+    ]
   }
 }
