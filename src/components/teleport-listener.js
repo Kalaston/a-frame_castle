@@ -23,13 +23,14 @@ AFRAME.registerComponent('teleport-listener', {
         cameraRig = document.getElementById('cameraRig');
         this.el.addEventListener('teleported', () => {
             if (!intersections.length) { return; }
+            var intersection = intersections[0].object.el;
 
-            if (intersections[0].object.el.classList.contains('portal')) {
+            if (intersection.classList.contains('portal')) {
                 teleportFader.object3D.visible = true;
-                intersections[0].object.el.emit('click');
+                intersection.emit('click');
 
                 if(this.el.sceneEl.dataset.isHome) {
-                    localStorage.setItem('portalLocation', JSON.stringify(intersections[0].object.el.getAttribute('position')));
+                    localStorage.setItem('portalLocation', JSON.stringify(intersection.getAttribute('position')));
                 }
             } else {
                 soundPool.play();
