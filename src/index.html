@@ -22,6 +22,9 @@
         <a-assets>
             <a-asset-item id="scenario" src="assets/castle/scene.gltf"></a-asset-item>
             <img id="pyramid" src="/assets/piramide.jpg">
+            <img id="portalImg" src="/assets/img/portal.png">
+            <img id="shadowImg" src="/assets/img/shadow.png">
+            <img id="sliceImg" src="/assets/img/slice.png">
 
             <!-- Mixins -->
             <a-mixin id="hand"
@@ -29,11 +32,18 @@
                      teleport-listener
             ></a-mixin>
 
+            <a-mixin id="hoverAnimation"
+                     animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic; pauseEvents: touched"></a-mixin>
+
+            <a-mixin id="slice" slice9="color: #050505; src: #sliceImg; left: 50; right: 52; top: 50; bottom: 52; padding: 0.04"></a-mixin>
+
             <a-mixin id="portal"
-                     look-at="#camera"
+                     look-at="#head"
                      geometry="primitive: circle; segments: 64"
-                     material="shader: yolistliPortal; backgroundColor: #333; transparent: true"
-                     animation__mouseenterscale="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; easing: easeInOutQuad; dir: alternate; loop: true; startEvents: mouseenter; dur: 1000; pauseEvents: mouseleave"></a-mixin>
+                     material="shader: yoPortal; backgroundColor: #333; transparent: true"
+                     animation__mouseenterscale="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; easing: easeInOutQuad; dir: alternate; loop: true; startEvents: mouseenter; dur: 1000; pauseEvents: mouseleave"
+            ></a-mixin>
+
         </a-assets>
 
         <!-- Nav Mesh -->
@@ -66,14 +76,36 @@
         <a-simple-sun-sky sun-position="-5 8 3"></a-simple-sun-sky>
 
         <!-- Portals -->
-        <a-link
-            portal
-            class="portal"
-            href="templates/pyramid.html"
-            title="Piramide" image="#pyramid"
-            position="-11 0.5 -7"
-            rotation="0 60 0"
-        ></a-link>
+
+            <a-entity class="portal"
+                      id="pyramid-portal"
+                      portal
+                      mixin="portal hoverAnimation"
+                      yo-portal="href: templates/pyramid.html"
+                      material="pano: assets/img/portal/piramide.jpg"
+                      position="-9 0 -4">
+                <a-entity class="portalEffect1"
+                          obj-model="obj: assets/models/portal/portal.obj"
+                          additive
+                          material="color: #03c1e2; opacity: 0.6; depthWrite: false; shader: flat; transparent: true; src: #portalImg"
+                          position="0 0 -0.017"
+                          rotation="0 90 90"
+                          scale="3.116 3.116 3.116"
+                          animation="property: object3D.rotation.x; from: 0; to: 6.283185; dur: 10000; loop: true; easing: linear"></a-entity>
+                <a-entity class="portalEffect2" obj-model="obj: assets/models/portal/portal.obj"
+                          additive
+                          material="color: #f37132; opacity: 0.6; depthWrite: false; shader: flat; transparent: true; src: #portalImg"
+                          position="0 0 -0.058"
+                          rotation="0 90 90"
+                          scale="3.078 0.969 3.078"
+                          animation="property: object3D.rotation.x; from: 0; to: 6.283185; dur: 15000; loop: true; easing: linear"></a-entity>
+                <a-entity class="portalText"
+                          mixin="slice"
+                          slice9="color:  #111; height: 0.3; width: 2.5; opacity: 0.7"
+                          text="color: #4ef580; align: center; value: Piramide; side: double; width: 4; zOffset: 0.01"
+                          position="0 1.3 0"></a-entity>
+            </a-entity>
+
 
     </a-scene>
 

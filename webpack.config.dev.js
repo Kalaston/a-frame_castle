@@ -5,7 +5,8 @@ const config = {
         contentBase: path.join(__dirname, 'src'),
         overlay: {
             errors: true,
-            warnings: false
+            warnings: false,
+            compress: true
         }
     },
 };

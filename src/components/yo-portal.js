@@ -1,7 +1,14 @@
+var SoundPool = require('../lib/soundpool');
+
 var previousZone = localStorage.getItem('previousZone');
 var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '{}');
 
-AFRAME.registerComponent('yolisyli-portal', {
+var hoverSoundPool;
+document.addEventListener('DOMContentLoaded', () => {
+    hoverSoundPool = SoundPool(utils.assetPath('assets/audio/hover.mp3'), 0.5, 2);
+});
+
+AFRAME.registerComponent('yo-portal', {
     schema: {
         color: {type: 'string'},
         href: {type: 'string'},
@@ -11,6 +18,10 @@ AFRAME.registerComponent('yolisyli-portal', {
 
     init: function () {
         var el = this.el;
+        var portalSound;
+
+        portalSound = new Audio(utils.assetPath('assets/audio/portal.mp3'));
+        portalSound.volume = 0.25;
 
         // Hide back portal if there is no back to go to.
         if (this.data.isBackPortal) {
@@ -22,6 +33,7 @@ AFRAME.registerComponent('yolisyli-portal', {
 
         // Navigate.
         el.addEventListener('click', () => {
+            portalSound.play();
             setTimeout(() => {
                 if (this.data.isBackPortal) {
                     window.location.href = localStorage.getItem('previousZone');
@@ -36,6 +48,7 @@ AFRAME.registerComponent('yolisyli-portal', {
 
         el.addEventListener('mouseenter', () => {
             this.setColor('#FFF');
+            hoverSoundPool.play();
         });
 
         el.addEventListener('mouseleave', () => {
@@ -73,7 +86,7 @@ AFRAME.registerComponent('yolisyli-portal', {
     }
 });
 
-AFRAME.registerShader('yolistliPortal', {
+AFRAME.registerShader('yoPortal', {
     schema: {
         backgroundColor: {default: 'red', type: 'color', is: 'uniform'},
         isGrayscale: {type: 'int', is: 'uniform', default: 0.0},
@@ -81,6 +94,6 @@ AFRAME.registerShader('yolistliPortal', {
         time: {type: 'time', is: 'uniform'}
     },
 
-    vertexShader: require('../assets/shaders/oasisPortalVertex.glsl'),
-    fragmentShader: require('../assets/shaders/oasisPortalFragment.glsl')
+    vertexShader: require('../assets/shaders/yoPortalVertex.glsl'),
+    fragmentShader: require('../assets/shaders/yoPortalFragment.glsl')
 });

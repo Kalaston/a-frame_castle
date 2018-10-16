@@ -13,28 +13,31 @@ AFRAME.registerComponent('teleport-listener', {
         var intersections;
         var soundPool;
         var teleportFader;
+        var cameraRig;
 
-        this.currentIntersection = null;
         intersections = el.components['teleport-controls'].intersections;
 
         // Listen to teleported for blink effect and play sound.
         soundPool = SoundPool(utils.assetPath('assets/audio/portal.wav'), 0.6, 5);
         teleportFader = document.getElementById('teleportFader');
+        cameraRig = document.getElementById('cameraRig');
         this.el.addEventListener('teleported', () => {
-
             if (!intersections.length) { return; }
 
             if (intersections[0].object.el.classList.contains('portal')) {
-                var faderTimeout;
-
                 teleportFader.object3D.visible = true;
-                setTimeout(() => {
-                    teleportFader.object3D.visible = false;
-                }, 160);
-
                 intersections[0].object.el.emit('click');
+
+                if(this.el.sceneEl.dataset.isHome) {
+                    localStorage.setItem('portalLocation', JSON.stringify(intersections[0].object.el.getAttribute('position')));
+                }
             } else {
                 soundPool.play();
+
+                // Store last location in home
+                if(this.el.sceneEl.dataset.isHome) {
+                    localStorage.setItem('homeLocation', JSON.stringify(cameraRig.getAttribute('position')));
+                }
             }
         });
 
