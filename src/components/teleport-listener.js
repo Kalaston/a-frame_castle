@@ -27,6 +27,7 @@ AFRAME.registerComponent('teleport-listener', {
 
             if (intersection.classList.contains('portal')) {
                 teleportFader.object3D.visible = true;
+                localStorage.setItem('lastPortal', intersection.id);
                 intersection.emit('click');
 
                 if(this.el.sceneEl.dataset.isHome) {

@@ -2,25 +2,27 @@ AFRAME.registerComponent('teleport-refresh', {
     init: function() {
         // Back to the previous location after use a portal
         var repositionateCamera = false;
-        var homePageName = '/index.html';
-        var previousZone = localStorage.getItem('previousZone');
+        var lastPortal = localStorage.getItem('lastPortal');
         var homeLocation = localStorage.getItem('homeLocation');
         var portalLocation = localStorage.getItem('portalLocation');
 
         if(this.el.sceneEl.dataset.isHome) {
-            if(!previousZone || !homeLocation || !portalLocation) {
-                repositionateCamera = false;
-            } else {
-                repositionateCamera = !(previousZone === window.location.href || previousZone === window.location.href + '/' + homePageName);
-            }
+            if(!lastPortal || !homeLocation || !portalLocation) { repositionateCamera = false; }
+            else { repositionateCamera = (lastPortal !== 'pyramid-portal'); }
 
-            console.log(repositionateCamera);
             if(repositionateCamera) {
                 var cameraRig = document.getElementById('cameraRig');
                 var homePosition = JSON.parse(homeLocation);
                 var portalPosition = JSON.parse(portalLocation);
 
-                cameraRig.object3D.position.set(homePosition.x, portalPosition.y - 1.6, homePosition.z);
+                if (window.performance) {
+                    var perfEntries = performance.getEntriesByType('navigation')[0];
+                    if (perfEntries.type !== 'reload') {
+                        cameraRig.object3D.position.set(homePosition.x, portalPosition.y - 1.6, homePosition.z);
+                    }
+                } else {
+                    cameraRig.object3D.position.set(homePosition.x, portalPosition.y - 1.6, homePosition.z);
+                }
             }
         }
 
