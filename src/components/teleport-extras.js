@@ -10,7 +10,7 @@ AFRAME.registerComponent('teleport-extras', {
         //Create the touchstart event
         document.querySelector('a-scene').addEventListener('touchstart', function () {
             isExtraControllerVisible = isNoHandVisible();
-            if(isExtraControllerVisible) { targetEl.emit('startteleport'); console.log('VISIBLE'); console.log(isExtraControllerVisible) } else { console.log('NO VISIBLE') }
+            if(isExtraControllerVisible) { targetEl.emit('startteleport'); }
         });
 
         document.querySelector('a-scene').addEventListener('mousedown', function () {
