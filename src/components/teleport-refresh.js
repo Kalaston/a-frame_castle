@@ -18,9 +18,11 @@ AFRAME.registerComponent('teleport-refresh', {
         // Toggle extra teleport controls
         document.querySelector('a-scene').addEventListener('enter-vr', function () {
             document.getElementById('no-hand').object3D.visible = false;
+            console.log('ENTER VR');
         });
         document.querySelector('a-scene').addEventListener('exit-vr', function () {
             document.getElementById('no-hand').object3D.visible = true;
+            console.log('EXIT VR');
         });
     },
     play: function () {
