@@ -1,12 +1,21 @@
 AFRAME.registerComponent('teleport-refresh', {
     init: function() {
         // Back to the previous location after use a portal
+        var repositionateCamera = false;
+        var homePageName = '/index.html';
         var previousZone = localStorage.getItem('previousZone');
         var homeLocation = localStorage.getItem('homeLocation');
         var portalLocation = localStorage.getItem('portalLocation');
 
-        if (!previousZone || previousZone === window.location.href || previousZone === window.location.href + '/index.html') {
-            if (this.el.sceneEl.dataset.isHome && homeLocation !== null) {
+        if(this.el.sceneEl.dataset.isHome) {
+            if(!previousZone || !homeLocation || !portalLocation) {
+                repositionateCamera = false;
+            } else {
+                repositionateCamera = !(previousZone === window.location.href || previousZone === window.location.href + '/' + homePageName);
+            }
+
+            console.log(repositionateCamera);
+            if(repositionateCamera) {
                 var cameraRig = document.getElementById('cameraRig');
                 var homePosition = JSON.parse(homeLocation);
                 var portalPosition = JSON.parse(portalLocation);
@@ -16,13 +25,19 @@ AFRAME.registerComponent('teleport-refresh', {
         }
 
         // Toggle extra teleport controls
+        var noHandControl = document.getElementById('no-hand');
+        var leftHand = document.getElementById('left-hand');
+        var rightHand = document.getElementById('right-hand');
+
         document.querySelector('a-scene').addEventListener('enter-vr', function () {
-            document.getElementById('no-hand').object3D.visible = false;
-            console.log('ENTER VR');
+            noHandControl.object3D.visible = false;
+            leftHand.object3D.visible = true;
+            rightHand.object3D.visible = true;
         });
         document.querySelector('a-scene').addEventListener('exit-vr', function () {
-            document.getElementById('no-hand').object3D.visible = true;
-            console.log('EXIT VR');
+            noHandControl.object3D.visible = true;
+            leftHand.object3D.visible = false;
+            rightHand.object3D.visible = false;
         });
     },
     play: function () {
