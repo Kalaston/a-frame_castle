@@ -1,5 +1,6 @@
 AFRAME.registerComponent('teleport-refresh', {
     init: function() {
+        // Back to the previous location after use a portal
         var previousZone = localStorage.getItem('previousZone');
         var homeLocation = localStorage.getItem('homeLocation');
         var portalLocation = localStorage.getItem('portalLocation');
@@ -13,10 +14,19 @@ AFRAME.registerComponent('teleport-refresh', {
                 cameraRig.object3D.position.set(homePosition.x, portalPosition.y - 1.6, homePosition.z);
             }
         }
+
+        // Toggle extra teleport controls
+        document.querySelector('a-scene').addEventListener('enter-vr', function () {
+            document.getElementById('no-hand').object3D.visible = false;
+        });
+        document.querySelector('a-scene').addEventListener('exit-vr', function () {
+            document.getElementById('no-hand').object3D.visible = true;
+        });
     },
     play: function () {
         var i;
         var teleportEntities;
+
         setTimeout(() => {
             teleportEntities = document.querySelectorAll('a-entity[teleport-controls]');
             for (i = 0; i < teleportEntities.length; i++) {
