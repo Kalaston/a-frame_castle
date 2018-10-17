@@ -10,7 +10,6 @@ AFRAME.registerComponent('teleport-extras', {
         //Create the touchstart event
         document.querySelector('a-scene').addEventListener('touchstart', function () {
             executeAction = isActionable();
-            console.log('ACTION ' + executeAction);
             if(executeAction) { targetEl.emit('startteleport'); }
         });
 

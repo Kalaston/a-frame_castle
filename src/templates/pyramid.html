@@ -36,7 +36,7 @@
             </a-entity>
 
             <!-- RIGHT HAND: Primary hand. -->
-            <a-entity id="right-hand" mixin="hand"
+            <a-entity id="right-hand" mixin="hand" teleport-controls="startEvents: trackpaddown, triggerdown; endEvents: trackpadup, triggerup"
                       vive-controls="hand: right" microsoft-motion-controls="hand: right" oculus-touch-controls="hand: right"
                       daydream-controls="hand: right" visible="false">
             </a-entity>
