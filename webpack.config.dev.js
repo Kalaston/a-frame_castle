@@ -5,8 +5,10 @@ const config = {
         contentBase: path.join(__dirname, 'src'),
         overlay: {
             errors: true,
-            warnings: false,
-            compress: true
+            warnings: false
+        },
+        headers: {
+            'Access-Control-Allow-Origin': '*'
         }
     },
 };
