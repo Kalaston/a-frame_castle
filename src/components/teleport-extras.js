@@ -4,8 +4,7 @@ AFRAME.registerComponent('teleport-extras', {
         var executeAction = false;
 
         function isActionable() {
-            return (document.getElementById('no-hand').getAttribute('visible') &&
-                !document.getElementById('right-hand').getAttribute('visible'));
+            return localStorage.getItem('vrModeActive') != 'true';
         }
 
         //Create the touchstart event

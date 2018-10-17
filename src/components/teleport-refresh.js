@@ -32,14 +32,14 @@ AFRAME.registerComponent('teleport-refresh', {
         var rightHand = document.getElementById('right-hand');
 
         document.querySelector('a-scene').addEventListener('enter-vr', function () {
-            noHandControl.object3D.visible = false;
-            leftHand.object3D.visible = true;
-            rightHand.object3D.visible = true;
+            if (AFRAME.utils.device.checkHeadsetConnected()) {
+                localStorage.setItem('vrModeActive', 'true');
+            }
         });
         document.querySelector('a-scene').addEventListener('exit-vr', function () {
-            noHandControl.object3D.visible = true;
-            leftHand.object3D.visible = false;
-            rightHand.object3D.visible = false;
+            if (!AFRAME.utils.device.checkHeadsetConnected()) {
+                localStorage.setItem('vrModeActive', 'false');
+            }
         });
     },
     play: function () {
