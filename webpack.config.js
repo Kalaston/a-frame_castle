@@ -1,8 +1,9 @@
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Detect Node Environment Variable and load corresponing webpack config-extras
 const prod = process.argv.indexOf('-p') !== -1 || process.argv.indexOf('production') !== -1  || process.env.NODE_ENV === 'production';
@@ -17,11 +18,11 @@ const PATHS = {
 var entries = [];
 if (prod) {
     entries = [
-        path.join(__dirname, 'src/index.js'),
-        path.join(__dirname, 'src/load-sworker.js')
+        path.join(__dirname, 'src', 'index.js'),
+        path.join(__dirname, 'src', 'load-sworker.js')
     ];
 } else {
-    entries = path.join(__dirname, 'src/index.js');
+    entries = path.join(__dirname, 'src', 'index.js');
 }
 
 const config = {
@@ -115,19 +116,41 @@ const config = {
             {
                 test: /\.glsl$/,
                 use: [{ loader: 'webpack-glsl-loader' }]
+            },
+            {
+                test: /\.hbs/,
+                use: [{
+                    loader: 'handlebars-loader',
+                    options: {
+                        partialDirs: [ path.join(__dirname, 'src', 'partials') ],
+                        helperDirs: [ path.join(__dirname, 'src', 'helpers') ],
+                        inlineRequires: path.join(__dirname, 'src', 'assets', 'img'),
+                        precompileOptions: {
+                            knownHelpersOnly: false
+                        }
+                    }
+                }]
             }
         ]
     },
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                handlebarsLoader: {}
+            }
+        }),
         new HtmlWebpackPlugin({
-            title: 'Yolistli',
-            template: `${PATHS.app}/index.html`,
+            title: "Yolistli",
+            // the template you want to use
+            template: path.join(__dirname, 'src', 'index.hbs'),
+            filename: path.join(__dirname, 'build', 'index.html'),
             inject: 'head'
         }),
         new HtmlWebpackPlugin({
-            title: 'Yolistli - Pyramid',
-            template: `${PATHS.app}/templates/pyramid.html`,
-            filename: 'templates/pyramid.html',
+            title: "Yolistli - Piramide",
+            // the template you want to use
+            template: path.join(__dirname, 'src', 'portals', 'pyramid.hbs'),
+            filename: path.join(__dirname, 'build', 'portals', 'pyramid.html'),
             inject: 'head'
         }),
         new CopyWebpackPlugin([

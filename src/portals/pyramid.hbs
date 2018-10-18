@@ -1,0 +1,34 @@
+{{> ../templates/default}}
+<a-scene>
+    <a-assets teleport-refresh vr-mode-ui="enabled: true">
+        <img id="pyramid-img" crossOrigin="anonymous" src="/assets/piramide.jpg">
+        <img id="pyramid" src="/assets/piramide.jpg">
+        <img id="portalImg" src="/assets/img/portal.png">
+        <img id="shadowImg" src="/assets/img/shadow.png">
+        <img id="sliceImg" src="/assets/img/slice.png">
+
+        {{!-- Mixins --}}
+        {{> hand-mixin }}
+        {{> portal-mixins}}
+    </a-assets>
+
+    <a-sky id="pyramid" radius="10" src="#pyramid-img"></a-sky>
+
+    <a-entity id="cameraRig">
+        <a-entity id="head" position="0 1.6 0" camera look-controls="pointerLockEnabled:true">
+            <!-- Control for Web and Mobile -->
+            {{> non-vr-control }}
+            <a-entity id="teleportFader" geometry="primitive: box" material="color: #111; shader: flat; side: back" visible="false"></a-entity>
+        </a-entity>
+
+        {{> teleport-controls}}
+    </a-entity>
+
+    <!-- Portals -->
+    {{> portal id="home-portal"
+        href="../index.html"
+        img="../assets/img/portal/piramide.jpg"
+        name="Inicio"
+        position="-4 0.5 -6" }}
+
+</a-scene>

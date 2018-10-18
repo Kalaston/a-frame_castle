@@ -27,10 +27,7 @@ AFRAME.registerComponent('teleport-refresh', {
         }
 
         // Toggle extra teleport controls
-        var noHandControl = document.getElementById('no-hand');
-        var leftHand = document.getElementById('left-hand');
-        var rightHand = document.getElementById('right-hand');
-
+        console.log(document.querySelector('a-scene').is('controllerconnected'));
         document.querySelector('a-scene').addEventListener('enter-vr', function () {
             if (AFRAME.utils.device.checkHeadsetConnected()) {
                 localStorage.setItem('vrModeActive', 'true');

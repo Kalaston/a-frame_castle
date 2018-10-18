@@ -1,0 +1,51 @@
+{{> templates/default }}
+
+<a-scene stats renderer="antialias: false;
+             gammaOutput: true;
+             sortObjects: true;
+             physicallyCorrectLights: true"
+         data-is-home="true"
+         teleport-refresh
+         vr-mode-ui="enabled: true">
+
+    {{!-- Asset management system. --}}
+    <a-assets>
+        <a-asset-item id="scenario" src="assets/castle/scene.gltf"></a-asset-item>
+        <img id="pyramid" src="/assets/piramide.jpg">
+        <img id="portalImg" src="/assets/img/portal.png">
+        <img id="shadowImg" src="/assets/img/shadow.png">
+        <img id="sliceImg" src="/assets/img/slice.png">
+
+        {{!-- Mixins --}}
+        {{> hand-mixin }}
+        {{> portal-mixins}}
+    </a-assets>
+
+    {{!-- Nav Mesh --}}
+    <a-entity ground gltf-model="assets/navmesh.gltf" nav-mesh visible="false"></a-entity>
+
+    {{!-- Scene. --}}
+    <a-entity id="cameraRig">
+        <a-entity id="head" position="0 1.6 0" camera look-controls="pointerLockEnabled:true">
+            {{!-- Control for Web and Mobile --}}
+            {{> non-vr-control }}
+            <a-entity id="teleportFader" geometry="primitive: box" material="color: #111; shader: flat; side: back" visible="false"></a-entity>
+        </a-entity>
+
+        {{> teleport-controls }}
+    </a-entity>
+
+    {{!-- Main scenario --}}
+    <a-entity gltf-model="#scenario" position="7 -13 0"></a-entity>
+
+    {{!-- Sky --}}
+    <a-simple-sun-sky sun-position="-5 8 3"></a-simple-sun-sky>
+
+    {{!-- Portals --}}
+    {{> portal id="pyramid-portal"
+        href="portals/pyramid.html"
+        img="assets/img/portal/piramide.jpg"
+        name="Piramide"
+        position="-9 0 -4" }}
+
+</a-scene>

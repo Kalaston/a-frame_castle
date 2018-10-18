@@ -8,7 +8,10 @@ require('aframe-look-at-component');
 require('aframe-slice9-component');
 require('aframe-teleport-controls');
 
-//User Components
+// User Components
 require('./utils');
 function requireAll (req) { req.keys().forEach(req); }
 requireAll(require.context('./components/', true, /\.js$/));
+
+// Handlebars
+require('./yo-handlebars');
