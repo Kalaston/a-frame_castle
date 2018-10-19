@@ -122,9 +122,8 @@ const config = {
                 use: [{
                     loader: 'handlebars-loader',
                     options: {
-                        partialDirs: [ path.join(__dirname, 'src', 'partials') ],
-                        helperDirs: [ path.join(__dirname, 'src', 'helpers') ],
-                        inlineRequires: path.join(__dirname, 'src', 'assets', 'img'),
+                        partialDirs: [ path.join(__dirname, 'src', 'hbs', 'partials') ],
+                        helperDirs: [ path.join(__dirname, 'src', 'hbs', 'helpers') ],
                         precompileOptions: {
                             knownHelpersOnly: false
                         }

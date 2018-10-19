@@ -1,4 +1,3 @@
-var AFRAME = require('aframe');
 window.utils = {};
 
 /**

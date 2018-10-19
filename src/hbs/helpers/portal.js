@@ -1,17 +1,19 @@
 module.exports = function (property, options) {
-    var hash = options.hash;
-    var id = hash.id;
-    var name = hash.name;
-    var href = hash.href;
-    var img = hash.img;
-    var poisition = hash.position;
+    const hash = options.hash;
+    const portal = {
+        id: hash.id,
+        name: hash.name,
+        href: hash.href,
+        img: hash.img,
+        position: hash.position
+    };
 
     return `<a-entity class="portal"
-                      id="${id}"
+                      id="${portal.id}"
                       mixin="portal hoverAnimation"
-                      yo-portal="href: ${href}"
-                      material="pano: ${img}"
-                      position="${poisition}">
+                      yo-portal="href: ${portal.href}"
+                      material="pano: ${portal.img}"
+                      position="${portal.position}">
                 <a-entity class="portalEffect1"
                           obj-model="obj: /assets/models/portal/portal.obj"
                           additive
@@ -31,7 +33,7 @@ module.exports = function (property, options) {
                 <a-entity class="portalText"
                           mixin="slice"
                           slice9="color:  #111; height: 0.3; width: 2.5; opacity: 0.7"
-                          text="color: #4ef580; align: center; value: ${name}; side: double; width: 4; zOffset: 0.01"
+                          text="color: #4ef580; align: center; value: ${portal.name}; side: double; width: 4; zOffset: 0.01"
                           position="0 1.3 0"></a-entity>
             </a-entity>`;
 };

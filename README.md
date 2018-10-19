@@ -13,7 +13,7 @@ ___
 ## Installation
 
     git clone https://github.com/Kalaston/yolistli.git
-    cd webvr_boilerplate
+    cd yolistli
     npm install
 
 ## File Structure + Descriptions
