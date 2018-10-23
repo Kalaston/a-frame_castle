@@ -27,7 +27,6 @@ AFRAME.registerComponent('teleport-refresh', {
         }
 
         // Toggle extra teleport controls
-        console.log(document.querySelector('a-scene').is('controllerconnected'));
         document.querySelector('a-scene').addEventListener('enter-vr', function () {
             if (AFRAME.utils.device.checkHeadsetConnected()) {
                 localStorage.setItem('vrModeActive', 'true');
