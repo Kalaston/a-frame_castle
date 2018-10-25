@@ -19,10 +19,14 @@ var entries = [];
 if (prod) {
     entries = [
         path.join(__dirname, 'src', 'index.js'),
-        path.join(__dirname, 'src', 'load-sworker.js')
+        path.join(__dirname, 'src', 'load-sworker.js'),
+        path.join(__dirname, 'src', 'styles', 'main.scss')
     ];
 } else {
-    entries = path.join(__dirname, 'src', 'index.js');
+    entries = [
+        path.join(__dirname, 'src', 'index.js'),
+        path.join(__dirname, 'src', 'styles', 'main.scss')
+    ];
 }
 
 const config = {
@@ -30,10 +34,13 @@ const config = {
     entry: {
         app: entries
     },
+    // This next line generates source maps to help with debugging.
+    // Don't want source maps? Get rid of it.
+    devtool: 'source-map',
     // Here we're defining the output of our bundled JS.
     output: {
-        path: PATHS.build,
-        filename: '[name].js'
+        filename: '[name].js',
+        path: PATHS.build
     },
     // This is the extra rules that we have to handle our SCSS and ES2015.
     module: {
@@ -92,6 +99,8 @@ const config = {
                         options: {
                             sourceMap: true,
                             includePaths: [
+                                './node_modules/spinkit/scss/',
+                                './node_modules/bootstrap/scss/',
                                 './node_modules/@fortawesome/fontawesome-free/scss/',
                                 './node_modules/roboto-fontface/css/roboto/sass/'
                             ]
@@ -108,7 +117,7 @@ const config = {
                         options: {
                             name: '[name].[ext]',
                             outputPath: 'fonts/',
-                            publicPath: '../../assets/fonts/',
+                            publicPath: 'assets/fonts/'
                         }
                     }
                 ]
@@ -151,6 +160,10 @@ const config = {
             template: path.join(__dirname, 'src', 'portals', 'pyramid.hbs'),
             filename: path.join(__dirname, 'build', 'portals', 'pyramid.html'),
             inject: 'head'
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles/[name].css',
+            chunkFilename: 'styles/[id].css',
         }),
         new CopyWebpackPlugin([
                 { from: 'src/assets', to: 'assets' },

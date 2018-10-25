@@ -1,12 +1,15 @@
 {{> hbs/templates/default }}
 
+{{> preloader }}
+
 <a-scene stats renderer="antialias: false;
              gammaOutput: true;
              sortObjects: true;
              physicallyCorrectLights: true"
          data-is-home="true"
          teleport-refresh
-         vr-mode-ui="enabled: true">
+         vr-mode-ui="enabled: true"
+         preloader="slowLoad: true; debug: true;">
 
     {{!-- Asset management system. --}}
     <a-assets>
