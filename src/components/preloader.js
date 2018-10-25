@@ -30,7 +30,8 @@ AFRAME.registerSystem('preloader', {
         debug: { type: 'boolean', default: false}, //whether or not to enable logging to console
         disableVRModeUI: { type: 'boolean', default: true}, //whether or not to disable VR Mode UI when preloading
         slowLoad: { type: 'boolean', default: false}, //deliberately slow down the load progress by adding 2 second delays before updating progress - used to showcase loader on fast connections and should not be enabled in production
-        doneLabelText: { type: 'string', default: 'Cargando Experiencia VR...'} //text to set on label when loading is complete
+        doneLabelText: { type: 'string', default: 'Iniciando Experiencia VR...'}, //text to set on label when loading is complete
+        skAnimation: { type: 'selector', default: '.sk-spinner-pulse' }
     },
 
     /**
@@ -146,6 +147,9 @@ AFRAME.registerSystem('preloader', {
 
     drawProgress: function(percentage){
         this.data.label.innerHTML = (percentage === 100) ? this.data.doneLabelText : this.data.labelText.format(percentage);
+        if(percentage === 100 && this.data.skAnimation.length) {
+            this.data.skAnimation.parentNode.removeChild(this.data.skAnimation);
+        }
     },
 
     initPreloader: function(){
@@ -165,7 +169,10 @@ AFRAME.registerSystem('preloader', {
     },
 
     closeDiv: function(){
-        this.data.target.style.display = 'none';
-        this.data.target.style.zIndex = '0';
+        const _this = this;
+        setTimeout(function () {
+            _this.data.target.style.display = 'none';
+            _this.data.target.style.zIndex = '0';
+        }, 1500);
     }
 });

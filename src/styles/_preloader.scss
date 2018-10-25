@@ -1,7 +1,7 @@
 // Spinkit settings
 $spinkit-spinner-margin: 0 auto;
-$spinkit-size: 60px;
-$spinkit-spinner-color: #fff;
+$spinkit-size: 200px;
+$spinkit-spinner-color: #242226;
 
 .preloader {
     position: absolute;
@@ -9,8 +9,9 @@ $spinkit-spinner-color: #fff;
     height: 100%;
     top: 0;
     left: 0;
-    background-color: #2c3e50;
-    color: #fff;
+    color: #E6E6E6;
+    background: #443f47;
+    background: radial-gradient(circle at center, #443f47 0, #242226 100%);
 
     > * {
         user-select: none; /* Standard syntax */
@@ -20,7 +21,7 @@ $spinkit-spinner-color: #fff;
 
 .preloader-inner {
     position: absolute;
-    width: 200px;
+    width: 250px;
     height: 200px;
     top: 0;
     bottom: 0;
@@ -30,15 +31,26 @@ $spinkit-spinner-color: #fff;
     text-align: center;
 }
 
-.spinner-ct {
-    width: 60px;
-    height: 60px;
+.progress-label {
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.preloader-logo {
+    display: block;
+    width: 200px;
+    height: 200px;
     top: 0;
     left: 0;
     right: 0;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 10px auto;
 }
 
-.progress-label {
-    text-transform: uppercase;
+.sk-spinner {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
