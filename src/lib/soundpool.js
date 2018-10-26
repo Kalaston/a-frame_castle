@@ -4,6 +4,8 @@ module.exports = function SoundPool (src, volume, size) {
     var pool = [];
     var sound;
 
+    if (typeof src === 'undefined') { return; }
+
     var fileExt = src.split('.').pop();
     for (i = 0; i < size; i++) {
         sound = new Audio(src);

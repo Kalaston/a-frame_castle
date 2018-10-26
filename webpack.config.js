@@ -30,6 +30,8 @@ if (prod) {
 }
 
 const config = {
+    // Tell Webpack where to start looking for your files.
+    context: path.resolve(__dirname),
     // We are looking at the Bootstrap files you installed with NPM.
     entry: {
         app: entries
@@ -46,7 +48,7 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
@@ -109,15 +111,15 @@ const config = {
                 ]
             },
             {
-                test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
                 exclude: /images/,
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
-                            outputPath: 'fonts/',
-                            publicPath: 'assets/fonts/'
+                            outputPath: 'assets/fonts/',
+                            publicPath: '/assets/fonts/'
                         }
                     }
                 ]
@@ -152,6 +154,13 @@ const config = {
             // the template you want to use
             template: path.join(__dirname, 'src', 'index.hbs'),
             filename: path.join(__dirname, 'build', 'index.html'),
+            inject: 'head'
+        }),
+        new HtmlWebpackPlugin({
+            title: "Yolistli",
+            // the template you want to use
+            template: path.join(__dirname, 'src', 'home.hbs'),
+            filename: path.join(__dirname, 'build', 'home.html'),
             inject: 'head'
         }),
         new HtmlWebpackPlugin({

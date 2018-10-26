@@ -69,7 +69,8 @@
     "npm": "^6.4.1",
     "popper.js": "^1.14.4",
     "roboto-fontface": "^0.10.0",
-    "spinkit": "^1.2.5"
+    "spinkit": "^1.2.5",
+    "typeface-pacifico": "0.0.54"
   },
   "semistandard": {
     "globals": [

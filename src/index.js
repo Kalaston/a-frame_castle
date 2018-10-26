@@ -11,6 +11,9 @@ require('aframe-teleport-controls');
 // jQuery
 window.$ = window.jQuery = require('jquery');
 
+// Pacifico font
+require('typeface-pacifico');
+
 // Bootstrap
 window.Popper = require('popper.js').default; // pay attention to "default"
 require('bootstrap/dist/js/bootstrap');
@@ -22,3 +25,6 @@ requireAll(require.context('./components/', true, /\.js$/));
 
 // Handlebars
 require('./lib/yo-handlebars');
+
+// Intro
+require('./lib/intro');

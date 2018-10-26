@@ -15,5 +15,7 @@ window.utils.getFaceCenter = (function () {
 })();
 
 window.utils.assetPath = function (asset) {
-    return AFRAME.scenes[0].dataset.isHome === 'true' ? asset : `../${asset}`;
+    if(typeof AFRAME.scenes[0] !== 'undefined') {
+        return AFRAME.scenes[0].dataset.isHome === 'true' ? asset : `../${asset}`;
+    }
 };
