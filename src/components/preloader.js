@@ -49,6 +49,8 @@ AFRAME.registerSystem('preloader', {
      */
     init: function () {
 
+        if(!this.data.target) { return; };
+
         if(this.data.debug){
             console.log('Initialized preloader');
         }
