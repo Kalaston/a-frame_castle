@@ -17,8 +17,13 @@ require('bootstrap/dist/js/bootstrap');
 
 // Yolistli Components
 require('./utils');
-function requireAll (req) { req.keys().forEach(req); }
+function requireAll(req) {
+    req.keys().forEach(req);
+}
 requireAll(require.context('./components/', true, /\.js$/));
 
 // Handlebars
 require('./lib/yo-handlebars');
+
+// Starry sky
+require('./lib/starry-sky');

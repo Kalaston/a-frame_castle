@@ -6,8 +6,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Detect Node Environment Variable and load corresponing webpack config-extras
-const prod = process.argv.indexOf('-p') !== -1 || process.argv.indexOf('production') !== -1  || process.env.NODE_ENV === 'production';
-const ENV_CONF = prod ? require('./webpack.config.prod') : require('./webpack.config.dev');
+const prod =
+    process.argv.indexOf('-p') !== -1 ||
+    process.argv.indexOf('production') !== -1 ||
+    process.env.NODE_ENV === 'production';
+const ENV_CONF = prod
+    ? require('./webpack.config.prod')
+    : require('./webpack.config.dev');
 
 // Tell Webpack where to start looking for your files.
 const PATHS = {
@@ -91,7 +96,12 @@ const config = {
                         loader: 'postcss-loader',
                         options: {
                             sourceMap: true,
-                            config: { path: path.resolve(__dirname, './postcss.config.js') }
+                            config: {
+                                path: path.resolve(
+                                    __dirname,
+                                    './postcss.config.js'
+                                )
+                            }
                         }
                     },
                     {
@@ -128,16 +138,22 @@ const config = {
             },
             {
                 test: /\.hbs/,
-                use: [{
-                    loader: 'handlebars-loader',
-                    options: {
-                        partialDirs: [ path.join(__dirname, 'src', 'hbs', 'partials') ],
-                        helperDirs: [ path.join(__dirname, 'src', 'hbs', 'helpers') ],
-                        precompileOptions: {
-                            knownHelpersOnly: false
+                use: [
+                    {
+                        loader: 'handlebars-loader',
+                        options: {
+                            partialDirs: [
+                                path.join(__dirname, 'src', 'hbs', 'partials')
+                            ],
+                            helperDirs: [
+                                path.join(__dirname, 'src', 'hbs', 'helpers')
+                            ],
+                            precompileOptions: {
+                                knownHelpersOnly: false
+                            }
                         }
                     }
-                }]
+                ]
             }
         ]
     },
@@ -148,24 +164,32 @@ const config = {
             }
         }),
         new HtmlWebpackPlugin({
-            title: "Yolistli",
+            title: 'Yolistli',
             // the template you want to use
             template: path.join(__dirname, 'src', 'index.hbs'),
             filename: path.join(__dirname, 'build', 'index.html'),
             inject: 'head'
         }),
         new HtmlWebpackPlugin({
-            title: "Yolistli - Piramide",
+            title: 'Yolistli - Piramide',
             // the template you want to use
             template: path.join(__dirname, 'src', 'portals', 'pyramid.hbs'),
             filename: path.join(__dirname, 'build', 'portals', 'pyramid.html'),
             inject: 'head'
         }),
+        new HtmlWebpackPlugin({
+            title: 'Yolistli - Introducción',
+            // the template you want to use
+            template: path.join(__dirname, 'src', 'portals', 'intro.hbs'),
+            filename: path.join(__dirname, 'build', 'portals', 'intro.html'),
+            inject: 'head'
+        }),
         new MiniCssExtractPlugin({
             filename: 'styles/[name].css',
-            chunkFilename: 'styles/[id].css',
+            chunkFilename: 'styles/[id].css'
         }),
-        new CopyWebpackPlugin([
+        new CopyWebpackPlugin(
+            [
                 { from: 'src/assets', to: 'assets' },
                 { from: 'src/manifest.json' }
             ],
@@ -173,7 +197,7 @@ const config = {
                 copyUnmodified: true,
                 watch: false
             }
-        ),
+        )
     ],
     devServer: {
         contentBase: path.join(__dirname, 'src'),
@@ -187,5 +211,5 @@ const config = {
 
 // Export a merge of base- and dev/prod- config
 module.exports = env => {
-    return merge(config, ENV_CONF)
+    return merge(config, ENV_CONF);
 };
