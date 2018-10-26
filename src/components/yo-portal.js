@@ -5,18 +5,22 @@ var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '{}');
 
 var hoverSoundPool;
 document.addEventListener('DOMContentLoaded', () => {
-    hoverSoundPool = SoundPool(utils.assetPath('assets/audio/hover.mp3'), 0.5, 2);
+    hoverSoundPool = SoundPool(
+        utils.assetPath('assets/audio/hover.mp3'),
+        0.5,
+        2
+    );
 });
 
 AFRAME.registerComponent('yo-portal', {
     schema: {
-        color: {type: 'string'},
-        href: {type: 'string'},
-        isBackPortal: {default: false},
-        isHomePortal: {default: false}
+        color: { type: 'string' },
+        href: { type: 'string' },
+        isBackPortal: { default: false },
+        isHomePortal: { default: false }
     },
 
-    init: function () {
+    init: function() {
         var el = this.el;
         var portalSound;
 
@@ -40,7 +44,10 @@ AFRAME.registerComponent('yo-portal', {
                 } else {
                     visitedZones[this.data.href] = true;
                     localStorage.setItem('previousZone', window.location.href);
-                    localStorage.setItem('visitedZones', JSON.stringify(visitedZones));
+                    localStorage.setItem(
+                        'visitedZones',
+                        JSON.stringify(visitedZones)
+                    );
                     window.location.href = this.data.href;
                 }
             }, 500);
@@ -63,8 +70,10 @@ AFRAME.registerComponent('yo-portal', {
             this.originalColor = '#6688cc';
         } else if (this.data.isHomePortal) {
             this.originalColor = '#33aa33';
-        } else if (localStorage.getItem('waybackmachine') === 'true' &&
-            visitedZones[this.data.href] === true) {
+        } else if (
+            localStorage.getItem('waybackmachine') === 'true' &&
+            visitedZones[this.data.href] === true
+        ) {
             // Change border color if visited already.
             this.originalColor = '#AF55AF';
         }
@@ -72,13 +81,19 @@ AFRAME.registerComponent('yo-portal', {
         this.setColor(this.originalColor);
     },
 
-    update: function () {
-        if (this.data.color) { this.originalColor = this.data.color; }
+    update: function() {
+        if (this.data.color) {
+            this.originalColor = this.data.color;
+        }
     },
 
-    setColor: function (color) {
+    setColor: function(color) {
         var el = this.el;
-        el.querySelector('.portalEffect1').setAttribute('material', 'color', color);
+        el.querySelector('.portalEffect1').setAttribute(
+            'material',
+            'color',
+            color
+        );
         el.querySelector('.portalText').setAttribute('text', 'color', color);
 
         el.setAttribute('animation__mouseenter', 'from', color);
@@ -88,10 +103,10 @@ AFRAME.registerComponent('yo-portal', {
 
 AFRAME.registerShader('yoPortal', {
     schema: {
-        backgroundColor: {default: 'red', type: 'color', is: 'uniform'},
-        isGrayscale: {type: 'int', is: 'uniform', default: 0.0},
-        pano: {type: 'map', is: 'uniform'},
-        time: {type: 'time', is: 'uniform'}
+        backgroundColor: { default: 'red', type: 'color', is: 'uniform' },
+        isGrayscale: { type: 'int', is: 'uniform', default: 0.0 },
+        pano: { type: 'map', is: 'uniform' },
+        time: { type: 'time', is: 'uniform' }
     },
 
     vertexShader: require('../assets/shaders/yoPortalVertex.glsl'),

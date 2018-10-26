@@ -13,8 +13,11 @@
     {{> portal-mixins}}
   </a-assets>
 
-  <a-sky color="black"></a-sky>
-  <a-entity star-system></a-entity>
+  <a-sky color="black">
+  </a-sky>
+  <a-entity star-system>
+    <a-animation attribute="rotation" easing="linear" dur="50000" to="360 360 0" repeat="indefinite"></a-animation>
+  </a-entity>
 
   <a-entity id="cameraRig">
     <a-entity id="head" position="0 1.6 0" camera look-controls="pointerLockEnabled:true">
@@ -39,4 +42,14 @@
   name="Piramide"
   position="4 0.5 -6" }}
 
+  <a-box color="tomato" depth="2" height="4" width="3" position="0 1 -6" data-click="box"></a-box>
+
+  {{!--
+  TODO:
+  Como los controles de colisión solo funcionan en "colision", se necesita agregar un mesh sobre
+  la caja para que esta pueda funcionar y agregarle un dataset para ser evaluado en teleport-listener.js
+
+  al reconocerlo se le agrega un hijo que sea el componente a mostrar (o se carga previamente y se cambia
+  el stado de visible=false) y de esta forma se puede realizar el toggle.
+  --}}
 </a-scene>
