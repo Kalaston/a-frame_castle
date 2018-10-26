@@ -8,7 +8,7 @@ module.exports = function (filepath, options) {
     const root = this.compilation.options.context + '/';
 
     // Current path
-    let fileName = this.htmlWebpackPlugin.options.filename.split('/');
+    let fileName = this.htmlWebpackPlugin.options.filename.split(path.sep);
     fileName.pop();
     fileName = fileName.join('/');
     let target = root + fileName;
@@ -17,7 +17,7 @@ module.exports = function (filepath, options) {
     let relativePath = path.relative(target, root);
     let relative;
     if(relativePath === '') {
-        relative = assetsPath + filepath
+        relative =  assetsPath + filepath;
     } else {
         relative = relativePath + '/' + assetsPath + filepath;
     }
