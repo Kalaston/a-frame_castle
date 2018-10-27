@@ -1,8 +1,9 @@
 
 document.addEventListener('DOMContentLoaded', function(event) {
-    var introButton = document.querySelector('#intro-button');
+    const introButton = document.querySelector('#intro-button');
     if(introButton) {
         introButton.addEventListener('click', function () {
+            window.localStorage.clear();
             window.location.href = 'home.html';
         });
     }

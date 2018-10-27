@@ -63,7 +63,9 @@ const config = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[name].[ext]'
+                            name: '[name].[ext]',
+                            outputPath: 'assets/img/',
+                            publicPath: '/assets/img/'
                         }
                     }
                 ]
@@ -176,7 +178,8 @@ const config = {
         }),
         new CopyWebpackPlugin([
                 { from: 'src/assets', to: 'assets' },
-                { from: 'src/manifest.json' }
+                { from: 'src/manifest.json' },
+                { from: 'src/assets/fonts', to: 'assets/fonts' }
             ],
             {
                 copyUnmodified: true,
